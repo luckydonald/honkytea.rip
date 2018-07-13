@@ -122,12 +122,15 @@ _________|     |   F    |J   F    |   //_/-'
 		activeSelector: function(node) { console.log(node); return node.classList.contains(document.body.getAttribute('data-state'))},
 		duration: 600
 	});
-
-	document.body.addEventListener('click', function () {
+	
+	var func = function () {
 		flipping.read();
 		document.body.setAttribute('data-state', document.body.getAttribute('data-state') === 'A' ? 'B' : 'A');
 		flipping.flip();
-	});
+	};
+
+	document.body.addEventListener('click', func);
+	document.body.addEventListener('touch', func);
 </script>
 </body>
 </html>
