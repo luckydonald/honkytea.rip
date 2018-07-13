@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <!-- https://github.com/luckydonald/honkytea.rip/ -->
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+	<!--<script src="../dist/flipping.web.js"></script>-->
+	<style>
+		* {
+			position: relative;
+			box-sizing: border-box;
+			user-select: none;
+		}
+		html, body {
+			height: 100%;
+			width: 100%;
+			margin: 0;
+			padding: 0;
+		}
+		body {
+			justify-content: flex-start;
+			align-content: center;
+		}
+		body [data-flip-key] {
+			will-change: transform;
+			display: none;
+			text-decoration: underline;
+		}
+		.main {
+			text-align: center;
+		}
+		.big {
+			font-family: Helvetica Neue, sans-serif;
+			color: #ff4444;
+			font-size: 10rem;
+			font-weight: normal;
+			letter-spacing: -.5rem;
+
+			margin: 0;
+			text-decoration: underline;
+		}
+		body[data-state="A"] [data-flip-key].A {
+			display: inline-block;
+		}
+		body[data-state="B"] [data-flip-key].B {
+			display: inline-block;
+		}
+		.s {
+			text-decoration: underline;
+		}
+	</style>
+</head>
+<body data-state="A">
+<div class="main" id="main">
+	<div class="big">
+		<span class="A" data-flip-key="h">h</span>
+		<span class="A" data-flip-key="o">o</span>
+		<span class="A" data-flip-key="n">n</span>
+		<span class="A" data-flip-key="k">k</span>
+		<span class="A" data-flip-key="y">y</span>
+		<span class="A" data-flip-key="space">&nbsp;</span>
+		<span class="A" data-flip-key="t">t</span>
+		<span class="A" data-flip-key="e">e</span>
+		<span class="A" data-flip-key="a">a</span>
+		<span class="A" data-flip-key="!">!</span>
+
+		<span class="B" data-flip-key="o">o</span>
+		<span class="B" data-flip-key="k">k</span>
+		<span class="B" data-flip-key="e">e</span>
+		<span class="B" data-flip-key="y">y</span>
+		<span class="B" data-flip-key="space">&nbsp;</span>
+		<span class="B" data-flip-key="t">t</span>
+		<span class="B" data-flip-key="h">h</span>
+		<span class="B" data-flip-key="a">a</span>
+		<span class="B" data-flip-key="n">n</span>
+		<span class="B" data-flip-key="!">!</span>
+	</div>
+	<a href="https://github.com/torvalds/linux/pull/486" class="A" data-flip-key="link1">https://github.com/torvalds/linux/pull/486</a>
+
+	<a href="https://github.com/torvalds/linux/pull/486#issuecomment-404757620" class="B" data-flip-key="link1">https://github.com/torvalds/linux/pull/486#issuecomment-404757620</a>
+</div>
+<script src="https://unpkg.com/flipping@latest/dist/flipping.web.js"></script>
+<script>
+	var flipping = new Flipping({
+		activeSelector: function(node) { console.log(node); return node.classList.contains(document.body.getAttribute('data-state'))},
+		duration: 600
+	});
+
+	document.body.addEventListener('click', function () {
+		flipping.read();
+		document.body.setAttribute('data-state', document.body.getAttribute('data-state') === 'A' ? 'B' : 'A');
+		flipping.flip();
+	});
+</script>
+</body>
+</html>
